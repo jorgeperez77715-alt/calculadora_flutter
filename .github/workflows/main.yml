@@ -1,11 +1,11 @@
 name: Build APK
-on: [push] # Se activa cada vez que guardas cambios
+on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # Actualizado a v4
       
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -19,7 +19,7 @@ jobs:
         run: flutter build apk --release
         
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4 # Actualizado a v4 para corregir el error
         with:
           name: MiCalculadoraAPK
           path: build/app/outputs/flutter-apk/app-release.apk
