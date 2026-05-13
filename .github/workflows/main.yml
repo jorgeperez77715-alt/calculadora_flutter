@@ -5,12 +5,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4 # Actualizado a v4
+      - uses: actions/checkout@v4
       
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+
+      - name: Reconstruct Project Structure
+        run: |
+          # Esto crea los archivos de Android que faltan
+          flutter create --platforms android . 
           
       - name: Install dependencies
         run: flutter pub get
@@ -19,7 +24,7 @@ jobs:
         run: flutter build apk --release
         
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4 # Actualizado a v4 para corregir el error
+        uses: actions/upload-artifact@v4
         with:
           name: MiCalculadoraAPK
           path: build/app/outputs/flutter-apk/app-release.apk
